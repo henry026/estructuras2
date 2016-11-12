@@ -1,0 +1,30 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("ingrese primer numero:");
+            string primernumero = Console.ReadLine();
+            Console.WriteLine("ingrese segundo numero:");
+            string segundonumero = Console.ReadLine();
+            int resul = Int32.Parse(primernumero) + Convert.ToInt32(segundonumero);
+          
+            string mensaje = "el resultado es:";
+
+            Console.WriteLine(mensaje + resul);
+            Console.ReadKey();
+        }
+       
+        
+            
+        }
+            
+    }
+
