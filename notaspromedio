@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace notas
+{
+    class notas
+    {
+        private float[] nota;
+        private float promedio;
+
+        public void Cargar() 
+        {
+        	Console .WriteLine ("Ingrese Nombre del curso");
+             string ingreso=Console .ReadLine();
+            nota=new float[5];
+            for (int f = 0; f < 5; f++)
+            {
+                 
+            	Console.WriteLine("Ingrese notas del estudiante:");
+                string linea = Console.ReadLine();
+                nota[f] = float.Parse(linea);
+            }
+        }
+    
+        public void CalcularPromedio() 
+        {
+            float suma;
+            suma=0;
+            for(int f=0; f < 5; f++) 
+            {
+                suma=suma+nota[f];
+            }
+            promedio=suma/5;
+            Console.WriteLine("Promedio de nota:"+promedio);
+        }
+
+        public void MayoresMenores() 
+        {
+            int may,men;
+            may=0;
+            men=0;
+            for(int f = 0; f < 5; f++) 
+            {
+                if (nota[f] > promedio) 
+                {
+	                may++;
+	                
+                }
+               
+                else
+                {
+                    if (nota[f] < promedio) 
+                    {
+                        men++;
+                         
+                    }
+                    
+                }
+            }
+            
+           Console.WriteLine("La nota mas baja esta en la posicion :"+men);
+           Console.WriteLine("La nota mas alta esta en la posicion :"+may);
+            Console.ReadKey();
+        }
+
+        static void Main(string[] args)
+        {
+            notas pv2 = new notas();
+            pv2.Cargar();
+            pv2.CalcularPromedio();
+            pv2.MayoresMenores();
+        }
+    }
+}
