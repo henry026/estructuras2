@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ConsoleApplication2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            
+            int credcurso,CantidaCursos,c=0,sumacreditos=0;
+            Double nota;
+            Double suma=0;
+            string respuesta="";
+            Console.Title = "           CALCULANDO EL PROMEDIO PONDERADO";
+            string nombrecurso;
+            do
+            {
+                do
+                {
+                    Console.Clear();
+                    Console.Write("Ingrese Cantidad de Cursos:");
+                    CantidaCursos = int.Parse(Console.ReadLine());
+                } while (CantidaCursos < 1);
+                while (c < CantidaCursos)
+                {
+                    c++;
+                    Console.Write("Curso {0}:", c);
+                    nombrecurso = Console.ReadLine();
+                    do
+                    {
+                        Console.Write("Ingrese nota del curso {0}:", c);
+                        nota = Double.Parse(Console.ReadLine());
+                    } while (nota < 0 || nota > 20);
+                    Console.Write("Ingrese Creditos del curso {0}:", c);
+                    credcurso = int.Parse(Console.ReadLine());
+                    suma += nota * credcurso;
+                    sumacreditos += credcurso;
+                }
+                Console.WriteLine("El Promedio Ponderado es :{0:F2}", suma / sumacreditos);
+                c = sumacreditos = 0;
+                suma = 0;
+                Console.WriteLine("Deseas Continuar (S/N):");
+                respuesta = Console.ReadLine();
+                Console.WriteLine("Presione una Tecla...........");
+            } while (respuesta == "s" || respuesta == "S");            
+            Console.ReadKey();
+
+        }
+    }
+}
