@@ -1,0 +1,55 @@
+/*
+ * Created by SharpDevelop.
+ * User: Elvis
+ * Date: 25/11/2016
+ * Time: 11:24 p. m.
+ * 
+ * To change this template use Tools | Options | Coding | Edit Standard Headers.
+ */
+
+using system;
+using system.collections.generic;
+using system.linq;
+using system.text;
+
+namespace arbol
+{
+	public class arbol{
+		class nodo //clase nodo declaramos una variable in public y dos nodos derecho e izq
+		{
+			public int in;
+			public nodo izq,der;
+		}
+		nodo raiz; // declare nodo raiz
+		public arbolOrdenado()// creamos constructor sin parametros donde
+		{
+		raiz=null; // raiz sera igual a null
+		}
+		public void insertar (int in) // se crea una funcion para insertar
+		{ // enviamos el valor entero in, esta recibe el parametro que esta en insertar
+			nodo nuevo;
+			nuevo.in=in; // recibe el valor del parametro
+			nuevo.izq=null;
+			nuevo.der=null;
+			if (raiz==null)// esto pasa solo al inicio 
+			raiz = nuevo;// el primer elemento que se ingresa es la raiz
+			else	// en el segundo recorrido ya tiene un valor con el else		
+			{
+			nodo ant=null,recorrido;// anterior sera igual a null
+			recorrido=raiz; // se crea el puntero recorrido y tendra el valor que tuvo raiz en el primer recorrido
+			while(recorrido!=null)// recorrido sera diferente a null
+			{
+				ant=recorrido;
+				if (in<recorrido.in)
+				recorrido=recorrido.izq;// si el valor del in es menor que recorrido.in iniciara a ingresar los valores del lado izq, sino los ingresa a la derecha
+				else
+				recorrido=recorrido.der;	
+			}
+			if (in<ant.in)// si es menor al dato anterior, 
+				ant.izq=nuevo;//sera el nuevo elmento que se ingresara en el segundo o tercer recorrido
+				else
+				ant.der=nuevo;
+			}
+		}
+	}
+}
