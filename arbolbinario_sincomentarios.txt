@@ -1,0 +1,175 @@
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Collections;
+
+namespace ELII_4
+{
+    public class ArbolBinario
+    {
+        public ArrayList LeftArray = new ArrayList(); 
+        public ArrayList RightArray = new ArrayList();
+
+        class Nodo 
+		
+        {
+            public int value;
+            public Nodo izq, der;
+        }
+        Nodo raiz; 
+				
+        public ArbolBinario()
+        {
+            raiz = null;
+        }
+
+        public void Insertar(int value) 
+        {				
+            Nodo nuevo;
+            nuevo = new Nodo();
+            nuevo.value = value; 
+            nuevo.izq = null;
+            nuevo.der = null;
+            if (raiz == null)
+                raiz = nuevo; 
+            else            
+            {
+                Nodo anterior = null, reco;
+                reco = raiz;  
+                while (reco != null) 
+                {
+                    anterior = reco;
+                    if (value < reco.value)
+                        reco = reco.izq;
+                    else
+                        reco = reco.der; 
+                }
+                if (value < anterior.value)
+                    anterior.izq = nuevo; 
+                else
+                    anterior.der = nuevo;
+            }
+
+           
+        }
+
+
+        private void PreOrden(Nodo reco)
+        {
+            if (reco != null)
+            {						//raiz,izquierda,derecha
+                Console.Write(reco.value + " ");//inicia por la raiz
+                PreOrden(reco.izq);//pasa por la izquierda
+                PreOrden(reco.der);//luego hacia la derecha
+            }
+        }
+
+
+        public void PreOrden()//funcion que ingresa a la privada
+        {
+            PreOrden(raiz);//enviamos el parametro raiz
+            Console.WriteLine(" PreOrden");
+        }
+
+        private void InOrden(Nodo reco)
+        {
+            if (reco != null)
+            {
+
+                LeftArray.Add(reco.izq);
+                InOrden(reco.izq);//ingresa por la izquierda 
+                Console.Write(reco.value + "  ");//pasa por raiz
+                InOrden(reco.der);//luego por la derecha
+            }
+        }
+
+        public void InOrden()//izquierda,raiz,derecha
+        {
+            InOrden(raiz);
+            Console.WriteLine("InOrden");
+        }
+
+
+        private void PortOrden(Nodo reco)//izquierdo,derecho raiz
+        {
+            if (reco != null)
+            {
+                PortOrden(reco.izq); 	//imprime por la parte izquierda
+                PortOrden(reco.der);//se va por la parte derecha 
+                Console.Write(reco.value + " ");//luego por la raiz
+            }
+        }
+         public void PortOrden()
+        {
+            PortOrden(raiz);
+            Console.WriteLine("PortOrden");
+        }
+
+
+        public void buscar(int value)
+        {
+            int count = 0;
+
+            Console.WriteLine("PreOrdenArray" + LeftArray.Count);
+
+            foreach (int element in LeftArray)
+            {
+                count += 1;
+                Console.WriteLine("Element #{0}: {1}", count, element);
+            }
+        }
+
+
+      
+        static void Main(string[] args)//ingresa al main
+        {
+
+            Random rnd = new Random();//se instancia la nueva clase sin parametros
+            int key, limit, searchvalue, index = 1;
+            string name;
+	    	string lastname,email,phone;
+
+            ArbolBinario abo = new ArbolBinario();
+
+
+            Console.WriteLine("Ingrese el numero de alumnos a ingresar");//enviamos nuestros parametros a insertar
+            limit = Convert.ToInt32(Console.ReadLine());
+
+            do
+            {			//en esta parte se imprime en pantalla todos los datos de nuestro arbol
+                key = rnd.Next(1, 100);
+                Console.WriteLine(" === Numero correlativo de ingreso {0} ", index++);
+                Console.WriteLine("Ingrese su nombre");
+                name = Console.ReadLine();
+                 Console.WriteLine("Ingrese su apellido");
+                 lastname = Console.ReadLine();
+                 Console.WriteLine("Ingrese su correo");
+                 email = Console.ReadLine();
+                 Console.WriteLine("Ingrese su telefono");
+                 phone = Console.ReadLine();
+                 Console.WriteLine(" === Codigo de referncia: {0} ", key);
+                limit--;
+                abo.Insertar(key);
+                //Console.ReadLine();
+            }
+            while (limit > 0);
+
+
+            Console.WriteLine("Ingrese el valor a buscar");
+            searchvalue = Convert.ToInt32(Console.ReadLine());
+
+            abo.buscar(searchvalue);
+
+
+            Console.WriteLine("Impresion preorden: ");
+            abo.PreOrden();
+            Console.WriteLine("Impresion InOrden: ");
+            abo.InOrden();
+            Console.WriteLine("Impresion postorden: ");
+            abo.PortOrden();
+             Console.ReadKey();
+        }
+    }
+}
